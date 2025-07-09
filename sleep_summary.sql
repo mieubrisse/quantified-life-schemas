@@ -1,5 +1,5 @@
 -- updated DDL for the *camel-case → snake-case* field names you just adopted
-CREATE TABLE sleep_summary (
+CREATE TABLE IF NOT EXISTS sleep_summary (
     -- calendar bucket + absolute timestamps
     start_time             TIMESTAMPTZ NOT NULL,          --  "startTime"
     end_time               TIMESTAMPTZ NOT NULL,          --  "endTime"
@@ -21,13 +21,13 @@ CREATE TABLE sleep_summary (
     light_30d_avg_minutes  SMALLINT              CHECK (light_30d_avg_minutes >= 0), -- "light30dAvgMinutes"
 
     rem_minutes            SMALLINT    NOT NULL CHECK (rem_minutes  >= 0),   -- "remMinutes"
-    rem_30d_avg_minutes    SMALLINT              CHECK (rem_30d_avg_minutes  >= 0), -- "rem30dAvgMinutes"
+    rem_30d_avg_minutes    SMALLINT             CHECK (rem_30d_avg_minutes  >= 0), -- "rem30dAvgMinutes"
 
     wake_minutes           SMALLINT    NOT NULL CHECK (wake_minutes >= 0),   -- "wakeMinutes"
-    wake_30d_avg_minutes   SMALLINT              CHECK (wake_30d_avg_minutes >= 0), -- "wake30dAvgMinutes"
+    wake_30d_avg_minutes   SMALLINT             CHECK (wake_30d_avg_minutes >= 0), -- "wake30dAvgMinutes"
 
     PRIMARY KEY (start_time, end_time)
 );
 
-CREATE INDEX idx_sleep_summary_start_time ON sleep_summary (start_time);
-CREATE INDEX idx_sleep_summary_end_time ON sleep_summary (end_time);
+CREATE INDEX IF NOT EXISTS idx_sleep_summary_start_time ON sleep_summary (start_time);
+CREATE INDEX IF NOT EXISTS idx_sleep_summary_end_time ON sleep_summary (end_time);
