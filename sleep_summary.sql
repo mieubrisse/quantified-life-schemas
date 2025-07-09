@@ -13,15 +13,17 @@ CREATE TABLE IF NOT EXISTS sleep_summary (
     efficiency_pct         SMALLINT    NOT NULL CHECK (efficiency_pct BETWEEN 0 AND 100),  -- "efficiencyPct"
     is_main_sleep          BOOLEAN     NOT NULL,
 
-    -- sleep-stage minutes
-    deep_minutes           SMALLINT    NOT NULL CHECK (deep_minutes  >= 0),  -- "deepMinutes"
-    deep_30d_avg_minutes   SMALLINT              CHECK (deep_30d_avg_minutes >= 0),  -- "deep30dAvgMinutes"
+    -- we can get NULL here for naps (non-main sleep)
+    deep_minutes           SMALLINT    CHECK (deep_minutes  >= 0),  -- "deepMinutes"
+    deep_30d_avg_minutes   SMALLINT    CHECK (deep_30d_avg_minutes >= 0),  -- "deep30dAvgMinutes"
 
-    light_minutes          SMALLINT    NOT NULL CHECK (light_minutes >= 0),  -- "lightMinutes"
-    light_30d_avg_minutes  SMALLINT              CHECK (light_30d_avg_minutes >= 0), -- "light30dAvgMinutes"
+    -- we can get NULL here for naps (non-main sleep)
+    light_minutes          SMALLINT    CHECK (light_minutes >= 0),  -- "lightMinutes"
+    light_30d_avg_minutes  SMALLINT    CHECK (light_30d_avg_minutes >= 0), -- "light30dAvgMinutes"
 
-    rem_minutes            SMALLINT    NOT NULL CHECK (rem_minutes  >= 0),   -- "remMinutes"
-    rem_30d_avg_minutes    SMALLINT             CHECK (rem_30d_avg_minutes  >= 0), -- "rem30dAvgMinutes"
+    -- we can get NULL here for naps (non-main sleep)
+    rem_minutes            SMALLINT    CHECK (rem_minutes  >= 0),   -- "remMinutes"
+    rem_30d_avg_minutes    SMALLINT    CHECK (rem_30d_avg_minutes  >= 0), -- "rem30dAvgMinutes"
 
     wake_minutes           SMALLINT    NOT NULL CHECK (wake_minutes >= 0),   -- "wakeMinutes"
     wake_30d_avg_minutes   SMALLINT             CHECK (wake_30d_avg_minutes >= 0), -- "wake30dAvgMinutes"
