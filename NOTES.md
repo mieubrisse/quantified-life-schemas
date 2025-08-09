@@ -1,0 +1,1 @@
+- On 2025-07-16 around 22:50:00T-04:00, I changed ActivityWatch to no longer consider `Zoom Meeting|Google Meet|Meet - |Microsoft Teams` to be AFK (as my screentime was artificially low due to meetings)
